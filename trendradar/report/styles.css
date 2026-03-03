@@ -1,0 +1,341 @@
+/*
+ * TrendRadar - Force Majeure Monitor
+ * 监控指挥中心风格样式表
+ */
+
+/* 字体导入 - 通过 @import 在 HTML 中添加 */
+
+/* CSS 变量 - 深色监控主题 */
+:root {
+    --bg-primary: #0a0a0a;
+    --bg-secondary: #111111;
+    --bg-tertiary: #1a1a1a;
+    --text-primary: #e0e0e0;
+    --text-secondary: #888888;
+    --text-muted: #444444;
+
+    --color-critical: #ff3333;
+    --color-warning: #ff9933;
+    --color-info: #00ff99;
+    --color-muted: #333333;
+
+    --border-color: #222222;
+    --border-glow: rgba(0, 255, 153, 0.1);
+
+    --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+    --font-display: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-display);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+    padding: 16px;
+}
+
+/* 背景网格效果 */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image:
+        linear-gradient(rgba(0, 255, 153, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 153, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* 扫描线动画 */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-info), transparent);
+    opacity: 0.3;
+    animation: scan 4s linear infinite;
+    pointer-events: none;
+    z-index: 2;
+}
+
+@keyframes scan {
+    0% { top: 0; }
+    100% { top: 100%; }
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+/* 头部 */
+.header {
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    padding: 40px;
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--color-critical), var(--color-warning), var(--color-info));
+}
+
+.save-buttons {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.save-btn {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    padding: 8px 16px;
+    background: transparent;
+    border: 1px solid var(--color-info);
+    color: var(--color-info);
+    cursor: pointer;
+    transition: var(--transition);
+    letter-spacing: 1px;
+}
+
+.save-btn:hover {
+    background: var(--color-info);
+    color: var(--bg-primary);
+    box-shadow: 0 0 20px var(--color-info);
+}
+
+.header-title {
+    font-family: var(--font-display);
+    font-size: clamp(24px, 5vw, 36px);
+    font-weight: 700;
+    letter-spacing: -1px;
+    margin: 0 0 10px 0;
+    background: linear-gradient(135deg, #fff 0%, var(--text-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.header-info {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    font-size: 14px;
+    opacity: 0.95;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.info-label {
+    display: block;
+    font-size: 11px;
+    font-family: var(--font-mono);
+    letter-spacing: 2px;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.info-value {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+/* 内容 */
+.content {
+    padding: 24px;
+}
+
+/* 关键词分组 */
+.word-group {
+    margin-bottom: 40px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+}
+
+.word-group:first-child {
+    margin-top: 0;
+}
+
+.word-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 20px 24px 12px;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-tertiary);
+}
+
+.word-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.word-name {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.word-count {
+    font-family: var(--font-mono);
+    font-size: 13px;
+    padding: 4px 10px;
+    border: 1px solid var(--color-info);
+    color: var(--color-info);
+}
+
+.word-count.hot {
+    border-color: var(--color-critical);
+    color: var(--color-critical);
+}
+
+.word-count.warm {
+    border-color: var(--color-warning);
+    color: var(--color-warning);
+}
+
+.word-index {
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    font-size: 11px;
+}
+
+/* 新闻条目 */
+.news-item {
+    margin: 0;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+    transition: var(--transition);
+}
+
+.news-item:last-child {
+    border-bottom: none;
+}
+
+.news-item:hover {
+    background: var(--bg-tertiary);
+}
+
+.news-item.new::after {
+    content: "NEW";
+    font-family: var(--font-mono);
+    font-size: 9px;
+    padding: 3px 6px;
+    background: var(--color-info);
+    color: var(--bg-primary);
+    border-radius: 2px;
+    letter-spacing: 1px;
+}
+
+.news-number {
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+    font-size: 13px;
+    font-weight: 600;
+    min-width: 30px;
+    text-align: center;
+}
+
+.news-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.news-title {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-primary);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 8px;
+    line-height: 1.4;
+    transition: var(--transition);
+}
+
+.news-title:hover {
+    color: var(--color-info);
+}
+
+.news-meta {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-secondary);
+}
+
+/* 页脚 */
+.footer {
+    margin-top: 40px;
+    padding: 20px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 1px;
+}
+
+/* 响应式 */
+@media (max-width: 640px) {
+    body {
+        padding: 12px;
+    }
+
+    .header {
+        padding: 25px;
+    }
+
+    .save-buttons {
+        position: static;
+        margin-bottom: 20px;
+        justify-content: flex-end;
+    }
+
+    .header-info {
+        grid-template-columns: 1fr;
+    }
+}
