@@ -263,8 +263,12 @@ class NewsAnalyzer:
             return False
 
     def _should_open_browser(self) -> bool:
-        """判断是否应该打开浏览器"""
-        return not self.is_github_actions and not self.is_docker_container
+        """判断是否应该打开浏览器
+
+        周期性运行时自动打开浏览器会累积窗口占用资源，
+        所以默认禁用。如需查看报告，直接访问 output/html/latest/ 目录
+        """
+        return False  # 禁用自动打开浏览器
 
     def _setup_proxy(self) -> None:
         """设置代理配置"""
