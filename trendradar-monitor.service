@@ -1,0 +1,22 @@
+[Unit]
+Description=TrendRadar Force Majeure Monitor
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=%i
+WorkingDirectory=/path/to/TrendRadar
+ExecStart=/path/to/TrendRadar/run-monitor.sh
+Restart=always
+RestartSec=10
+
+# Environment variables
+Environment=PYTHONIOENCODING=utf-8
+
+# Security
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
