@@ -41,7 +41,7 @@ app:
 # ===============================================================
 schedule:
   enabled: true                         # 是否启用调度系统
-  preset: "morning_evening"             # 预设模板名称（见上方说明）
+  preset: "daytime_monitor"             # 预设模板名称：daytime_monitor 白天监控（08:00-21:00推送）
 
 
 # ===============================================================
@@ -155,7 +155,8 @@ rss:
 #    • 适用场景：避免重复信息干扰
 # ===============================================================
 report:
-  mode: "current"                     # 可选: daily | current | incremental
+  mode: "incremental"                 # 可选: daily | current | incremental
+                                      # incremental: 有新增才推送（适合实时监控）
                                       # ⚠️ 开启调度系统后，此值会被当前时间段的 report_mode 覆盖
 
 
@@ -273,9 +274,9 @@ notification:
       smtp_port: ""                   # SMTP 端口（可选，留空自动识别）
 
     ntfy:
-      server_url: "https://ntfy.sh"   # ntfy 服务器地址（可改为自托管）
-      topic: ""                       # ntfy 主题名称
-      token: ""                       # ntfy 访问令牌（可选，用于私有主题）
+      server_url: "http://www.chaofan.online:8081"   # ntfy 服务器地址（可改为自托管）
+      topic: "global-alerts"                          # ntfy 主题名称
+      token: ""                                       # ntfy 访问令牌（可选，用于私有主题）
 
     bark:
       url: ""                         # Bark 推送 URL（格式：https://api.day.app/your_device_key）

@@ -1,0 +1,20 @@
+# 运行时文件
+.monitor.lock
+*.pyc
+__pycache__/
+*/__pycache__/
+
+# 输出数据
+output/
+*.db
+*.db-shm
+*.db-wal
+
+# 日志
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
